@@ -42,7 +42,7 @@ d3.json(API_plates, function (geoJson) {
         style: function (geoJsonFeature) {
             return {
                 weight: 2,
-                // color: 'magenta'
+                color: 'Red'
             }
         },
     }).addTo(plateBoundary);
@@ -66,73 +66,97 @@ d3.json(API_plates, function (geoJson) {
 // #f0a76b
 // #f06b6b
 
-function Color(magnitude) {
-    if (magnitude > 6.5) {
-        return '#f06b6b'
-    } else if (magnitude > 5) {
-        return '#f0a76b'
-    } else if (magnitude > 4) {
-        return '#f3ba4d'
-    } else if (magnitude > 3) {
-        return '#f3db4d'
-    } else if (magnitude > 2.5) {
-        return '#e1f34d'
-    } else {
-        return '#b7f34d'
+   function Color(magnitude) {
+        if (magnitude > 6.5) {
+            return '#f06b6b'
+        } else if (magnitude > 5) {
+            return '#f0a76b'
+        } else if (magnitude > 4) {
+            return '#f3ba4d'
+        } else if (magnitude > 3) {
+            return '#f3db4d'
+        } else if (magnitude > 2.5) {
+            return '#e1f34d'
+        } else {
+            return '#b7f34d'
     }
-};
+   };
 
 function createMap() {
-
-    var highContrastMap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox.high-contrast',
-        accessToken: APIKEY
-
-    var streetMap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox.streets',
-        accessToken: 
-    });
-
-    var darkMap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox.dark',
-        accessToken: APIKEY
-    });
-
 
     var satellite = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18,
         id: 'mapbox.satellite',
-        accessToken: APIKEY
+        // accessToken = API_KEY
+        accessToken: 'pk.eyJ1Ijoidmlqamlrb21hbGkiLCJhIjoiY2pxbWpyeXAzMDJsZDN5b2N0djZ2MzE0cSJ9.dWayph2vNAy2-8OI94a8UA'
+    });
+
+    var streetMap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        // accessToken = API_KEY
+        accessToken: 'pk.eyJ1Ijoidmlqamlrb21hbGkiLCJhIjoiY2pxbWpyeXAzMDJsZDN5b2N0djZ2MzE0cSJ9.dWayph2vNAy2-8OI94a8UA'
+    });
+
+    var highContrastMap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.high-contrast',
+        // accessToken = API_KEY
+        accessToken:  'pk.eyJ1Ijoidmlqamlrb21hbGkiLCJhIjoiY2pxbWpyeXAzMDJsZDN5b2N0djZ2MzE0cSJ9.dWayph2vNAy2-8OI94a8UA'   
+    });
+    // var streetMap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    //     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    //     maxZoom: 18,
+    //     id: 'mapbox.streets',
+    //     // accessToken = API_KEY
+    //     accessToken: 'pk.eyJ1Ijoidmlqamlrb21hbGkiLCJhIjoiY2pxbWpyeXAzMDJsZDN5b2N0djZ2MzE0cSJ9.dWayph2vNAy2-8OI94a8UA'
+    // });
+
+    var darkMap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.dark',
+        // accessToken = API_KEY
+        accessToken: 'pk.eyJ1Ijoidmlqamlrb21hbGkiLCJhIjoiY2pxbWpyeXAzMDJsZDN5b2N0djZ2MzE0cSJ9.dWayph2vNAy2-8OI94a8UA'
     });
 
 
-    var baseLayers = {
-        // "High Contrast": highContrastMap,
+    // var satellite = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    //     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    //     maxZoom: 18,
+    //     id: 'mapbox.satellite',
+    //     // accessToken = API_KEY
+    //     accessToken: 'pk.eyJ1Ijoidmlqamlrb21hbGkiLCJhIjoiY2pxbWpyeXAzMDJsZDN5b2N0djZ2MzE0cSJ9.dWayph2vNAy2-8OI94a8UA'
+    // });
+
+
+    
+
+    var overlays = {
+        "High Contrast": highContrastMap,
         "Street": streetMap,
         "Dark": darkMap,
         "Satellite": satellite
+        
     };
 
-    var overlays = {
+    var baseLayers = {
         "Earthquakes": earthquakes,
-        // "Plate Boundaries": plateBoundary,
+        "Plate Boundaries": plateBoundary,
     };
 
     var mymap = L.map('mymap', {
         center: [37.0902, -95.7129],
         zoom: 3.9,
         
-        layers: [streetMap, earthquakes]
+        layers: [plateBoundary, earthquakes, streetMap]
     });
 
     L.control.layers(baseLayers, overlays).addTo(mymap);
+
 
 // this is originial legend//
 // var legend = L.control({position: 'bottomright'});
@@ -174,33 +198,10 @@ function createMap() {
 
         return div;
     };
-    legend.addTo(mymap);
+        legend.addTo(mymap);
 
-
-//     // Set up the legend
-//     var legend = L.control({ position: "bottomright" });
-//     legend.onAdd = function(map) {
-//         var div = L.DomUtil.create("div", "info legend"),
-//             magnitude = [0, 1, 2, 3, 4, 5],
-//     // var limits = geojson.options.limits;
-//     // var colors = geojson.options.colors;
-//             var labels = [];
-
-    
-//         div.innerHTML += "<h4 style='margin:4px'>Magnitude</h4>"
-//         // div.innerHTML = legendInfo;
-//          for (var i = 0; i < magnitude.length; i++) {
-//                 div.innerHTML +=
-//                     '<i style="background:' + Color(magnitude[i] + 1) + '"></i> ' +
-//                     magnitude[i] + (magnitude[i + 1] ? '&ndash;' + magnitude[i + 1] + '<br>' : '+');
-//             }
-    
-//             return div;
-
-    
-//   };
-
-//   // Adding legend to the map
-//   legend.addTo(myMap);
+ 
+  // Adding legend to the map
+  legend.addTo(myMap);
 
 }
